@@ -8,17 +8,17 @@ Dependendies
 Neovim
 ------
 
-Mac OSX:
+MacOSX::
 
     brew install neovim/neovim/neovim
 
-Ubuntu:
+Ubuntu::
 
     sudo add-apt-repository ppa:neovim-ppa/unstable
     sudo apt-get update
     sudo apt-get install neovim
 
-Create softlinks for neovim:
+Create softlinks for neovim::
 
     ln -s ~/.config/nvim ~/.vim
     ln -s ~/.vim/init.vim ~/.vim/vimrc
@@ -26,6 +26,8 @@ Create softlinks for neovim:
 
 Vim plug
 --------
+
+MacOSX and Ubuntu::
 
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
