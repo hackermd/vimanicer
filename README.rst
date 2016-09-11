@@ -18,18 +18,25 @@ Ubuntu::
     sudo apt-get update
     sudo apt-get install neovim
 
-Create softlinks for neovim::
-
-    ln -s ~/.config/nvim ~/.vim
-    ln -s ~/.vim/init.vim ~/.vim/vimrc
-    ln -s ~/.vim/vimrc ~/.vimrc
-
 Vim plug
 --------
 
 MacOSX and Ubuntu::
 
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 
-This will also create the ``.vim`` directory.
+This will also create the ``.config/nvim/autoload`` directory.
+
+
+*************
+Configuration
+*************
+
+Create softlinks for neovim::
+
+    ln -s ~/.vim ~/.config/nvim
+    ln -s ~/.vim/init.vim ~/.vim/vimrc
+    ln -s ~/.vim/vimrc ~/.vimrc
+
