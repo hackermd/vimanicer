@@ -17,6 +17,8 @@ Ubuntu::
     sudo add-apt-repository ppa:neovim-ppa/unstable
     sudo apt-get update
     sudo apt-get install neovim
+    sudo pip install --upgrade neovim
+    sudo ln -s /usr/bin/python /usr/local/bin/python
 
 Vim plug
 --------
@@ -27,7 +29,8 @@ MacOSX and Ubuntu::
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 
-This will also create the ``.config/nvim/autoload`` directory.
+We don't download the version for Neovim, but create the respective symlinks
+later on.
 
 
 *************
@@ -40,3 +43,13 @@ Create softlinks for neovim::
     ln -s ~/.vim/init.vim ~/.vim/vimrc
     ln -s ~/.vim/vimrc ~/.vimrc
 
+
+Create alias for ``vim`` (in ``.bashrc`` or ``.bash_profile`` file):
+
+MacOSX::
+
+    alias vim=/usr/local/bin/nvim
+
+Ubuntu::
+
+    alias vim=/usr/bin/nvim
