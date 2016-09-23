@@ -2,6 +2,8 @@
 Installation
 ************
 
+    git clone https://github.com/HackerMD/vimanizer.git ~/.vim
+
 Dependendies
 ============
 
@@ -40,7 +42,6 @@ Configuration
 Create softlinks for neovim::
 
     ln -s ~/.vim ~/.config/nvim
-    ln -s ~/.vim/init.vim ~/.vim/vimrc
     ln -s ~/.vim/vimrc ~/.vimrc
 
 
