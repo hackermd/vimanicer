@@ -24,6 +24,9 @@ Ubuntu::
     sudo apt-get install neovim
     sudo pip install --upgrade neovim
     sudo ln -s /usr/bin/python /usr/local/bin/python
+    
+    sudo apt-get install python3-dev python3-pip
+    sudo pip3 install greenlet
 
 Vim plug
 --------
