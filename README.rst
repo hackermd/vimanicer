@@ -33,12 +33,8 @@ Vim plug
 
 MacOSX and Ubuntu::
 
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-
-We don't download the version for Neovim, but create the respective symlinks
-later on.
 
 
 *************
