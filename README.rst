@@ -2,10 +2,7 @@
 Installation
 ************
 
-Clone repository::
-
     git clone https://github.com/HackerMD/vimanizer.git ~/.vim
-
 
 Dependendies
 ============
