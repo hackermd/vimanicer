@@ -54,6 +54,7 @@ Configuration
 
 Create softlinks for neovim::
 
+    mkdir ~/.config
     ln -s ~/.vim ~/.config/nvim
     ln -s ~/.vim/vimrc ~/.vimrc
 
