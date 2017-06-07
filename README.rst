@@ -2,13 +2,13 @@
 Installation
 ************
 
-    git clone https://github.com/HackerMD/vimanizer.git ~/.vim
+    git clone https://github.com/hackermd/vimanizer.git ~/.vim
 
 Dependendies
 ============
 
-Neovim
-------
+Vim
+---
 
 MacOSX::
 
