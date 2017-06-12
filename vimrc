@@ -1,6 +1,8 @@
 call plug#begin('~/.vim/plugged')
 " Plug 'davidhalter/jedi-vim'            " Python autocompletion
+" Plug 'evgenyzinoviev/vim-vendetta'
 Plug 'sickill/vim-monokai'             " Monokai color skeme
+" Plug 'while1eq1/vim-monokai-black'     " Monokai color skeme with black backround
 Plug 'tpope/vim-commentary'            " Commenting operator gc
 Plug 'szw/vim-maximizer'               " Maximize windows
 Plug 'SirVer/ultisnips'                " Snippet system
@@ -19,12 +21,13 @@ Plug 'scrooloose/syntastic'
 Plug 'raimondi/delimitmate'            " Brackets
 Plug 'jmcantrell/vim-virtualenv'       " Running python in virtualenv
 Plug 'lervag/vimtex'                   " LaTeX editing and compilation
-call plug#end() 
+Plug 'benmills/vimux'                  " Tmux integration
+Plug 'Yggdroot/indentLine'             " Highlight intendation
+call plug#end()
 "=======================================================================
 " Basic settings {{{
 "=======================================================================
 set clipboard=unnamed
-" set clipboard+=unnamedplus
 set backspace=indent,eol,start
 set nocompatible
 set dictionary+=/usr/share/dict/words " Specify the builtin list of words for C-X C-K completion
@@ -94,11 +97,14 @@ set showmatch                       " Highlight (blinking) matching [{( when ins
 set list listchars=tab:⇥\ ,nbsp:·,trail:␣,extends:▸,precedes:◂
 " }}}
 set wmh=0                           " mininum window height
-colorscheme monokai                 " use other colorscheme
+colorscheme monokai                 " use custom colorscheme
 
 " open NERDTree automatically when no files are specified upon startup
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Let quit work as expected if after entering :q the only window left open is NERD Tree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " change intend behaviour for certain file types
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
