@@ -2,7 +2,14 @@
 Installation
 ************
 
+Clone the repository::
+
     git clone https://github.com/hackermd/vimanizer.git ~/.vim
+    
+Create a symlink for the `vimrc` file::
+
+    ln -s .vim/vimrc .vimrc
+
 
 Dependendies
 ============
