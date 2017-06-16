@@ -23,17 +23,19 @@ MacOSX::
 
 Ubuntu::
 
-    add-apt-repository ppa:jonathonf/vim
-    apt update
     apt install vim
 
     apt-get install python3-dev python3-pip
     pip3 install greenlet
+    
+CentOS::
+
+    yum install vim
 
 Vim plug
 --------
 
-MacOSX and Ubuntu::
+MacOS and Linux (already provided with the repository)::
 
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -48,3 +50,7 @@ MacOSX::
 Ubuntu::
 
     apt-get install silversearcher-ag
+    
+CentOS::
+
+    yum install the_silver_searcher
