@@ -52,3 +52,11 @@ MacOSX and Linux (already provided with the repository)::
 
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    
+    
+Vim Plugins
+===========
+
+Start vim and install plugins::
+
+    vim -c PlugInstall
