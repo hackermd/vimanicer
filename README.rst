@@ -54,8 +54,8 @@ MacOSX and Linux (already provided with the repository)::
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     
     
-Vim Plugins
-===========
+Plugins
+=======
 
 Start vim and install plugins::
 
