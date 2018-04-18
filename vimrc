@@ -2,11 +2,9 @@ call plug#begin('~/.vim/plugged')
 " Plug 'davidhalter/jedi-vim'            " Python autocompletion
 " Plug 'evgenyzinoviev/vim-vendetta'
 Plug 'sickill/vim-monokai'             " Monokai color skeme
-" Plug 'while1eq1/vim-monokai-black'     " Monokai color skeme with black backround
 Plug 'tpope/vim-commentary'            " Commenting operator gc
 Plug 'szw/vim-maximizer'               " Maximize windows
 Plug 'SirVer/ultisnips'                " Snippet system
-Plug 'leafgarland/typescript-vim'      " TypeScript syntax
 Plug 'honza/vim-snippets'              " Snippets
 Plug 'scrooloose/nerdtree'             " Nerd tree
 Plug 'Xuyuanp/nerdtree-git-plugin'     " Nerd tree with git integration
@@ -109,8 +107,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " change intend behaviour for certain file types
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
-autocmd FileType yml setlocal shiftwidth=2 tabstop=2
+autocmd FileType yml  setlocal shiftwidth=2 tabstop=2
+autocmd FileType js   setlocal shiftwidth=2 tabstop=2
 
+" Set different cursor for insert mode and visual mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
 
 " Change the default PDF viewer for vimtext to Skim
 let g:vimtex_view_general_viewer
