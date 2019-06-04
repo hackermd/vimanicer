@@ -4,7 +4,7 @@ Installation
 
 Clone the repository::
 
-    git clone https://github.com/hackermd/vimanizer.git ~/.vim
+    git clone https://github.com/hackermd/vimanicer.git ~/.vim
     
 
 Dependendies
