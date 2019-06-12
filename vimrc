@@ -1,14 +1,14 @@
 call plug#begin('~/.vim/plugged')
 " Plug 'davidhalter/jedi-vim'            " Python autocompletion
 " Plug 'evgenyzinoviev/vim-vendetta'
+Plug 'nvie/vim-flake8'                 " Python PEP8 style checker
 Plug 'sickill/vim-monokai'             " Monokai color skeme
 Plug 'tpope/vim-commentary'            " Commenting operator gc
 Plug 'szw/vim-maximizer'               " Maximize windows
-Plug 'SirVer/ultisnips'                " Snippet system
 Plug 'honza/vim-snippets'              " Snippets
 Plug 'scrooloose/nerdtree'             " Nerd tree
 Plug 'Xuyuanp/nerdtree-git-plugin'     " Nerd tree with git integration
-Plug 'kien/ctrlp.vim'                  " Fuzzy file finder
+Plug 'ctrlpvim/ctrlp.vim'              " Fuzzy file finder
 Plug 'bling/vim-airline'               " Fancy status bar
 Plug 'tpope/vim-fugitive'              " Git plugin
 Plug 'tpope/vim-repeat'                " Repeat all kinds of stuff
@@ -17,7 +17,6 @@ Plug 'tpope/vim-surround'              " Surround motions
 Plug 'airblade/vim-gitgutter'          " ]c [c
 Plug 'scrooloose/syntastic'
 Plug 'raimondi/delimitmate'            " Brackets
-Plug 'jmcantrell/vim-virtualenv'       " Running python in virtualenv
 Plug 'lervag/vimtex'                   " LaTeX editing and compilation
 Plug 'benmills/vimux'                  " Tmux integration
 Plug 'Yggdroot/indentLine'             " Highlight intendation
@@ -144,7 +143,7 @@ endfunction
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_show_hidden = 1
-" Default is search by full path. Switch with CTRL-d while in CtrlP prompt.
+" Default is search by full path. Switch with CTRL-d while in Ctrl-P prompt.
 " let g:ctrlp_by_filename = 0
 let g:ctrlp_root_markers = ['.ctrlp']
 
@@ -152,6 +151,12 @@ let g:ctrlp_custom_ignore = {
 \   'dir':  '\v(\.git|\.hg|\.svn|\.yardoc|public/images|public/system|data|tmp|resources/public/js|node_modules|bower_components)$',
 \   'file': '\v\.(o|m4a|pdf|swp|pyc|wav|mp3|ogg|blend|dvi|fls|aux|blg|bbl|log|loa|lof|toc|fdb_latexmk|lot|js.map|min.js|min.css|)$|\~$'
 \   }
+
+" No limit on path length/depth
+let g:ctrlp_path_nolim = 1
+"
+" Use find command to search for files
+let g:ctrlp_user_command = 'find %s -type f'
 
 " Save cache across sessions => much faster. Refresh with F5.
 let g:ctrlp_clear_cache_on_exit = 0
