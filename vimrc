@@ -31,12 +31,10 @@ set dictionary+=/usr/share/dict/words " Specify the builtin list of words for C-
 set thesaurus+=~/.vim/extra/mthesaur.txt
 set spelllang=en_us
 set nospell
-" set encoding="utf-8"
 syntax on                           " enable syntax highlighting
 filetype plugin on
 filetype indent on
 set shiftwidth=4                    " number of spaces to autoindent
-" set cryptmethod=blowfish2
 set tabstop=4                       " # spaces shown for one TAB
 set softtabstop=4                   " # spaces that are actually inserted/removed for a tab
 set expandtab                       " insert spaces when hitting TAB (with above options)
@@ -51,8 +49,6 @@ set hidden                          " edit another buffer while another one is u
 set lazyredraw                      " don't update the display while executing macros
 set laststatus=2                    " always show status line
 set autoread                        " automatically read a file that has changed on disk
-" set ofu=syntaxcomplete#Complete     " autocompletion so that menu will always appear
-" set cfu=
 set wildmenu                        " show a menu of possible completions when TABing incomplete commands
 set wildmode=list:longest,full      " how wild mode should behave
 set guioptions-=T                   " remove toolbar in gVim
@@ -86,33 +82,69 @@ set foldmethod=expr
 set colorcolumn=80                  " highlight the 80th col
 set history=1000                    " set the command line history
 set cmdwinheight=10                 " window height for cmd/search history q: q/ resp. C-h (C-f default)
-" set relativenumber
 set cursorline                      " Highlight current line
 let grepprg="ag\ --nocolor\ --nogroup\ --silent"
 set showmatch                       " Highlight (blinking) matching [{( when inserting the closing )}]
-" set list listchars=tab:»·,trail:·,extends:$,nbsp:= " Display tabs and trailing whitespace
 set list listchars=tab:⇥\ ,nbsp:·,trail:␣,extends:▸,precedes:◂
-" }}}
 set wmh=0                           " mininum window height
 colorscheme monokai                 " use custom colorscheme
+" }}}
 
+"------------------------------------------------------------------------------
+" {{{2 NERDTree
+" -----------------------------------------------------------------------------
 " open NERDTree automatically when no files are specified upon startup
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Let quit work as expected if after entering :q the only window left open is NERD Tree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" 2}}}
 
-" change intend behaviour for certain file types
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
-autocmd FileType yml  setlocal shiftwidth=2 tabstop=2
-autocmd FileType js   setlocal shiftwidth=2 tabstop=2
+"------------------------------------------------------------------------------
+" {{{2 Ctrlp
+" -----------------------------------------------------------------------------
+let g:ctrlp_map = '<C-p>'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_show_hidden = 1
+" Default is search by full path. Switch with CTRL-d while in Ctrl-P prompt.
+" let g:ctrlp_by_filename = 0
+let g:ctrlp_root_markers = ['.ctrlp']
 
-" Set different cursor for insert mode and visual mode
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
+let g:ctrlp_custom_ignore = {
+\   'dir':  '\v(\.git|\.hg|\.svn|\.yardoc|public/images|public/system|data|tmp|resources/public/js|node_modules|bower_components)$',
+\   'file': '\v\.(o|m4a|pdf|swp|pyc|wav|mp3|ogg|blend|dvi|fls|aux|blg|bbl|log|loa|lof|toc|fdb_latexmk|lot|js.map|min.js|min.css|)$|\~$'
+\   }
 
+" No limit on path length/depth
+let g:ctrlp_path_nolim = 1
+"
+" Use find command to search for files
+let g:ctrlp_user_command = 'find %s -type f'
+
+" Save cache across sessions => much faster. Refresh with F5.
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" 2}}}
+
+
+" -----------------------------------------------------------------------------
+" {{{2 DelimitMate
+" -----------------------------------------------------------------------------
+let delimitMate_expand_cr = 1
+" 2}}}
+
+
+" -----------------------------------------------------------------------------
+" {{{2 UltraSnippits
+" -----------------------------------------------------------------------------
+let g:python_host_prog = '/usr/local/bin/python'
+" 2}}}
+
+
+" -----------------------------------------------------------------------------
+" {{{2 Vimtes
+" -----------------------------------------------------------------------------
 " Change the default PDF viewer for vimtext to Skim
 let g:vimtex_view_general_viewer
       \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
@@ -137,52 +169,28 @@ function! UpdateSkim(status)
     call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
   endif
 endfunction
-
-" {{{2 Ctrlp
-"-----------------------------------------------------------------------
-let g:ctrlp_map = '<C-p>'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_show_hidden = 1
-" Default is search by full path. Switch with CTRL-d while in Ctrl-P prompt.
-" let g:ctrlp_by_filename = 0
-let g:ctrlp_root_markers = ['.ctrlp']
-
-let g:ctrlp_custom_ignore = {
-\   'dir':  '\v(\.git|\.hg|\.svn|\.yardoc|public/images|public/system|data|tmp|resources/public/js|node_modules|bower_components)$',
-\   'file': '\v\.(o|m4a|pdf|swp|pyc|wav|mp3|ogg|blend|dvi|fls|aux|blg|bbl|log|loa|lof|toc|fdb_latexmk|lot|js.map|min.js|min.css|)$|\~$'
-\   }
-
-" No limit on path length/depth
-let g:ctrlp_path_nolim = 1
-"
-" Use find command to search for files
-let g:ctrlp_user_command = 'find %s -type f'
-
-" Save cache across sessions => much faster. Refresh with F5.
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " 2}}}
 
-" {{{2 DelimitMate
-" ----------------------------------------------------------------------
-let delimitMate_expand_cr = 1
-" 2}}}
+" change intend behaviour for certain file types
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
+autocmd FileType yml  setlocal shiftwidth=2 tabstop=2
+autocmd FileType js   setlocal shiftwidth=2 tabstop=2
 
-" {{{2 UltraSnippits
-" ----------------------------------------------------------------------
-let g:python_host_prog = '/usr/local/bin/python'
-" 2}}}
+" Set different cursor for insert mode and visual mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
 
 " Buffer
 nnoremap <space>r :CtrlPBuffer<CR>
 " Search
 nnoremap <space>pa :Ag ""<Left>
-" Source
-nnoremap <space>. :source ~/.vimrc<CR>
 " Save
 nnoremap <space>w :w<CR>
 " Debugger
 nnoremap <space>t :NERDTreeToggle<CR>
-
+" Maximize
 nnoremap <C-w>m :MaximizerToggle<CR>
 vnoremap <C-w>m :MaximizerToggle<CR>gv
+" Spell
+nnoremap <space>, :setlocal spell! spelllang=en_us<CR>
