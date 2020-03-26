@@ -5,6 +5,7 @@ Plug 'nvie/vim-flake8'                 " Python PEP8 style checker
 Plug 'sickill/vim-monokai'             " Monokai color skeme
 Plug 'tpope/vim-commentary'            " Commenting operator gc
 Plug 'szw/vim-maximizer'               " Maximize windows
+Plug 'sirver/ultisnips'                " UltiSnips
 Plug 'honza/vim-snippets'              " Snippets
 Plug 'scrooloose/nerdtree'             " Nerd tree
 Plug 'Xuyuanp/nerdtree-git-plugin'     " Nerd tree with git integration
@@ -20,7 +21,10 @@ Plug 'raimondi/delimitmate'            " Brackets
 Plug 'lervag/vimtex'                   " LaTeX editing and compilation
 Plug 'benmills/vimux'                  " Tmux integration
 Plug 'Yggdroot/indentLine'             " Highlight intendation
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
+
 "=======================================================================
 " Basic settings {{{
 "=======================================================================
@@ -105,26 +109,20 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " {{{2 Ctrlp
 " -----------------------------------------------------------------------------
 let g:ctrlp_map = '<C-p>'
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = ''
 let g:ctrlp_show_hidden = 1
-" Default is search by full path. Switch with CTRL-d while in Ctrl-P prompt.
-" let g:ctrlp_by_filename = 0
 let g:ctrlp_root_markers = ['.ctrlp']
-
-let g:ctrlp_custom_ignore = {
-\   'dir':  '\v(\.git|\.hg|\.svn|\.yardoc|public/images|public/system|data|tmp|resources/public/js|node_modules|bower_components)$',
-\   'file': '\v\.(o|m4a|pdf|swp|pyc|wav|mp3|ogg|blend|dvi|fls|aux|blg|bbl|log|loa|lof|toc|fdb_latexmk|lot|js.map|min.js|min.css|)$|\~$'
-\   }
 
 " No limit on path length/depth
 let g:ctrlp_path_nolim = 1
-"
+let g:ctrlp_max_files = 0
+
 " Use find command to search for files
-let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_user_command = "find -E %s -type f ! -regex '(\.git|\.hg|\.svn|\.yardoc|public/images|public/system|data|tmp|resources/public/js|node_modules|bower_components)' ! -regex '.+\.(o|m4a|jpeg|jpg|png|tiff|dcm|pdf|swp|pyc|wav|mp3|ogg|blend|dvi|fls|aux|blg|bbl|log|loa|lof|toc|fdb_latexmk|lot|js.map|min.js|min.css)$'"
 
 " Save cache across sessions => much faster. Refresh with F5.
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_cache_dir = $HOME . "/.cache/ctrlp"
 " 2}}}
 
 
@@ -138,9 +136,10 @@ let delimitMate_expand_cr = 1
 " -----------------------------------------------------------------------------
 " {{{2 UltraSnippits
 " -----------------------------------------------------------------------------
-let g:python_host_prog = '/usr/local/bin/python'
+let g:python_host_prog = '/usr/local/bin/python3'
+let g:UltiSnipsExpandTrigger = '<tab>'
 " 2}}}
-
+"
 
 " -----------------------------------------------------------------------------
 " {{{2 Vimtes
