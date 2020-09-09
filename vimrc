@@ -1,6 +1,4 @@
 call plug#begin('~/.vim/plugged')
-" Plug 'davidhalter/jedi-vim'            " Python autocompletion
-" Plug 'evgenyzinoviev/vim-vendetta'
 Plug 'nvie/vim-flake8'                 " Python PEP8 style checker
 Plug 'sickill/vim-monokai'             " Monokai color skeme
 Plug 'tpope/vim-commentary'            " Commenting operator gc
@@ -18,7 +16,6 @@ Plug 'tpope/vim-surround'              " Surround motions
 Plug 'airblade/vim-gitgutter'          " ]c [c
 Plug 'scrooloose/syntastic'
 Plug 'raimondi/delimitmate'            " Brackets
-Plug 'lervag/vimtex'                   " LaTeX editing and compilation
 Plug 'benmills/vimux'                  " Tmux integration
 Plug 'Yggdroot/indentLine'             " Highlight intendation
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
