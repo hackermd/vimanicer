@@ -20,6 +20,10 @@ Plug 'benmills/vimux'                  " Tmux integration
 Plug 'Yggdroot/indentLine'             " Highlight intendation
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'dense-analysis/ale'              " Asynchronous Lint Engine
+Plug 'aliou/bats.vim'                  " Bash Automated Test System
+Plug 'cespare/vim-toml'                " Tom's Obvious, Minimal Language
+Plug 'JuliaEditorSupport/julia-vim'    " Julia Language
 call plug#end()
 
 "=======================================================================
