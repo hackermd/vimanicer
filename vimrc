@@ -37,13 +37,15 @@ set thesaurus+=~/.vim/extra/mthesaur.txt
 set spelllang=en_us
 set nospell
 syntax on                           " enable syntax highlighting
-filetype plugin on
+filetype on
 filetype indent on
+filetype plugin on
 set shiftwidth=4                    " number of spaces to autoindent
 set tabstop=4                       " # spaces shown for one TAB
 set softtabstop=4                   " # spaces that are actually inserted/removed for a tab
 set expandtab                       " insert spaces when hitting TAB (with above options)
-set autoindent                      " enable autoindenting
+set noautoindent                    " disable autoindenting
+set nosmartindent                   " disable smart indenting
 set relativenumber                  " view line numbers
 set number                          " show current line number (others will still be relative)
 set noshowmode
@@ -140,42 +142,26 @@ let delimitMate_expand_cr = 1
 let g:python_host_prog = '/usr/local/bin/python3'
 let g:UltiSnipsExpandTrigger = '<tab>'
 " 2}}}
-"
+
 
 " -----------------------------------------------------------------------------
-" {{{2 Vimtes
+" {{{2 Ale
 " -----------------------------------------------------------------------------
-" Change the default PDF viewer for vimtext to Skim
-let g:vimtex_view_general_viewer
-      \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-let g:vimtex_view_general_options = '-r @line @pdf @tex'
+let g:ale_linters = {'javascript': ['standard'], 'python': ['flake8', 'pylint']}
+let g:ale_fixers = {'javascript': ['standard'], 'python': ['black']}
+" 2}}}
 
-" This adds a callback hook that updates Skim after compilation
-let g:vimtex_compiler_callback_hooks = ['UpdateSkim']
-function! UpdateSkim(status)
-  if !a:status | return | endif
-
-  let l:out = b:vimtex.out()
-  let l:tex = expand('%:p')
-  let l:cmd = [g:vimtex_view_general_viewer, '-r']
-  if !empty(system('pgrep Skim'))
-    call extend(l:cmd, ['-g'])
-  endif
-  if has('nvim')
-    call jobstart(l:cmd + [line('.'), l:out, l:tex])
-  elseif has('job')
-    call job_start(l:cmd + [line('.'), l:out, l:tex])
-  else
-    call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
-  endif
-endfunction
+" -----------------------------------------------------------------------------
+" {{{2 Flake8
+" -----------------------------------------------------------------------------
+let g:flake8_show_in_gutter=1
 " 2}}}
 
 " change intend behaviour for certain file types
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
-autocmd FileType yml  setlocal shiftwidth=2 tabstop=2
-autocmd FileType js   setlocal shiftwidth=2 tabstop=2
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType yml  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Set different cursor for insert mode and visual mode
 let &t_SI = "\e[6 q"
