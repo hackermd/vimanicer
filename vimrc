@@ -95,6 +95,7 @@ set showmatch                       " Highlight (blinking) matching [{( when ins
 set list listchars=tab:⇥\ ,nbsp:·,trail:␣,extends:▸,precedes:◂
 set wmh=0                           " mininum window height
 colorscheme monokai                 " use custom colorscheme
+let g:tex_conceal = ""              " disable concealing in LaTeX
 " }}}
 
 "------------------------------------------------------------------------------
@@ -151,6 +152,7 @@ let g:ale_linters = {'javascript': ['standard'], 'python': ['flake8', 'pylint']}
 let g:ale_fixers = {'javascript': ['standard'], 'python': ['black']}
 " 2}}}
 
+
 " -----------------------------------------------------------------------------
 " {{{2 Flake8
 " -----------------------------------------------------------------------------
@@ -161,6 +163,7 @@ let g:flake8_show_in_gutter=1
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType yml  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Set different cursor for insert mode and visual mode
