@@ -8,7 +8,8 @@ Plug 'honza/vim-snippets'              " Snippets
 Plug 'scrooloose/nerdtree'             " Nerd tree
 Plug 'Xuyuanp/nerdtree-git-plugin'     " Nerd tree with git integration
 Plug 'ctrlpvim/ctrlp.vim'              " Fuzzy file finder
-Plug 'bling/vim-airline'               " Fancy status bar
+Plug 'vim-airline/vim-airline'         " Vim status line
+Plug 'edkolev/tmuxline.vim'            " Tmux status line supporting airline
 Plug 'tpope/vim-fugitive'              " Git plugin
 Plug 'tpope/vim-repeat'                " Repeat all kinds of stuff
 Plug 'rking/ag.vim'                    " Silver searcher: faster vimgrep/grep:
@@ -24,6 +25,7 @@ Plug 'dense-analysis/ale'              " Asynchronous Lint Engine
 Plug 'aliou/bats.vim'                  " Bash Automated Test System
 Plug 'cespare/vim-toml'                " Tom's Obvious, Minimal Language
 Plug 'JuliaEditorSupport/julia-vim'    " Julia Language
+Plug 'aklt/plantuml-syntax'            " PlantUML Language
 call plug#end()
 
 "=======================================================================
@@ -96,6 +98,7 @@ set list listchars=tab:⇥\ ,nbsp:·,trail:␣,extends:▸,precedes:◂
 set wmh=0                           " mininum window height
 colorscheme monokai                 " use custom colorscheme
 let g:tex_conceal = ""              " disable concealing in LaTeX
+let g:markdown_conceal = 0
 " }}}
 
 "------------------------------------------------------------------------------
@@ -121,12 +124,13 @@ let g:ctrlp_root_markers = ['.ctrlp']
 let g:ctrlp_path_nolim = 1
 let g:ctrlp_max_files = 0
 
-" Use find command to search for files
-let g:ctrlp_user_command = "find -E %s -type f ! -regex '(\.git|\.hg|\.svn|\.yardoc|public/images|public/system|data|tmp|resources/public/js|node_modules|bower_components)' ! -regex '.+\.(o|m4a|jpeg|jpg|png|tiff|dcm|pdf|swp|pyc|wav|mp3|ogg|blend|dvi|fls|aux|blg|bbl|log|loa|lof|toc|fdb_latexmk|lot|js.map|min.js|min.css)$'"
-
 " Save cache across sessions => much faster. Refresh with F5.
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME . "/.cache/ctrlp"
+
+" Use custom command to search for files. Note that wildignore and
+" ctrlp_custom_ignore will not work with the custom command.
+let g:ctrlp_user_command = "find %s -type f ! -regex '(\.git|\.hg|\.svn|\.yardoc|public/images|public/system|data|tmp|resources/public/js|node_modules|bower_components)' ! -regex '.+\.(o|m4a|jpeg|jpg|png|tiff|dcm|pdf|swp|pyc|wav|mp3|ogg|blend|dvi|fls|aux|blg|bbl|log|loa|lof|toc|fdb_latexmk|lot|js.map|min.js|min.css)$'"
 " 2}}}
 
 
@@ -165,6 +169,7 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType yml  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType typescript  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Set different cursor for insert mode and visual mode
 let &t_SI = "\e[6 q"
