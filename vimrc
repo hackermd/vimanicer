@@ -19,8 +19,8 @@ Plug 'scrooloose/syntastic'
 Plug 'raimondi/delimitmate'            " Brackets
 Plug 'benmills/vimux'                  " Tmux integration
 Plug 'Yggdroot/indentLine'             " Highlight intendation
+Plug 'vim-scripts/indentpython.vim'    " Python indent block selection
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dense-analysis/ale'              " Asynchronous Lint Engine
 Plug 'aliou/bats.vim'                  " Bash Automated Test System
 Plug 'cespare/vim-toml'                " Tom's Obvious, Minimal Language
@@ -130,7 +130,7 @@ let g:ctrlp_cache_dir = $HOME . "/.cache/ctrlp"
 
 " Use custom command to search for files. Note that wildignore and
 " ctrlp_custom_ignore will not work with the custom command.
-let g:ctrlp_user_command = "find %s -type f ! -regex '(\.git|\.hg|\.svn|\.yardoc|public/images|public/system|data|tmp|resources/public/js|node_modules|bower_components)' ! -regex '.+\.(o|m4a|jpeg|jpg|png|tiff|dcm|pdf|swp|pyc|wav|mp3|ogg|blend|dvi|fls|aux|blg|bbl|log|loa|lof|toc|fdb_latexmk|lot|js.map|min.js|min.css)$'"
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 " 2}}}
 
 
@@ -152,8 +152,8 @@ let g:UltiSnipsExpandTrigger = '<tab>'
 " -----------------------------------------------------------------------------
 " {{{2 Ale
 " -----------------------------------------------------------------------------
-let g:ale_linters = {'javascript': ['standard'], 'python': ['flake8', 'pylint']}
-let g:ale_fixers = {'javascript': ['standard'], 'python': ['black']}
+let g:ale_linters = {'javascript': ['standard'], 'typscript': ['ts-standard'], 'python': ['flake8', 'pylint']}
+let g:ale_fixers = {'javascript': ['standard'], 'typscript': ['ts-standard'], 'python': ['black']}
 " 2}}}
 
 
@@ -164,9 +164,14 @@ let g:flake8_show_in_gutter=1
 " 2}}}
 
 " change intend behaviour for certain file types
+au BufRead,BufNewFile *.ts set filetype=typescript
+au BufRead,BufNewFile *.tsx set filetype=typescript
+au BufRead,BufNewFile *.jsx set filetype=javascript
+au BufRead,BufNewFile *.yml set filetype=yaml
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType yml  setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType css  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript  setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType typescript  setlocal shiftwidth=2 tabstop=2 softtabstop=2
