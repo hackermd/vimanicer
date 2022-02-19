@@ -9,10 +9,9 @@ Plug 'scrooloose/nerdtree'             " Nerd tree
 Plug 'Xuyuanp/nerdtree-git-plugin'     " Nerd tree with git integration
 Plug 'ctrlpvim/ctrlp.vim'              " Fuzzy file finder
 Plug 'vim-airline/vim-airline'         " Vim status line
-Plug 'edkolev/tmuxline.vim'            " Tmux status line supporting airline
 Plug 'tpope/vim-fugitive'              " Git plugin
 Plug 'tpope/vim-repeat'                " Repeat all kinds of stuff
-Plug 'rking/ag.vim'                    " Silver searcher: faster vimgrep/grep:
+Plug 'mileszs/ack.vim'                 " Search tool
 Plug 'tpope/vim-surround'              " Surround motions
 Plug 'airblade/vim-gitgutter'          " ]c [c
 Plug 'scrooloose/syntastic'
@@ -23,7 +22,6 @@ Plug 'vim-scripts/indentpython.vim'    " Python indent block selection
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dense-analysis/ale'              " Asynchronous Lint Engine
 Plug 'aliou/bats.vim'                  " Bash Automated Test System
-Plug 'cespare/vim-toml'                " Tom's Obvious, Minimal Language
 Plug 'JuliaEditorSupport/julia-vim'    " Julia Language
 Plug 'aklt/plantuml-syntax'            " PlantUML Language
 call plug#end()
@@ -99,7 +97,16 @@ set wmh=0                           " mininum window height
 colorscheme monokai                 " use custom colorscheme
 let g:tex_conceal = ""              " disable concealing in LaTeX
 let g:markdown_conceal = 0
+set t_Co=256                        " set 256 screen color
 " }}}
+
+"------------------------------------------------------------------------------
+" {{{2 ack.vim
+" -----------------------------------------------------------------------------
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+" 2}}}
 
 "------------------------------------------------------------------------------
 " {{{2 NERDTree
@@ -152,8 +159,8 @@ let g:UltiSnipsExpandTrigger = '<tab>'
 " -----------------------------------------------------------------------------
 " {{{2 Ale
 " -----------------------------------------------------------------------------
-let g:ale_linters = {'javascript': ['standard'], 'typscript': ['ts-standard'], 'python': ['flake8', 'pylint']}
-let g:ale_fixers = {'javascript': ['standard'], 'typscript': ['ts-standard'], 'python': ['black']}
+let g:ale_linters = {'javascript': ['standard'], 'typscript': ['standard'], 'python': ['flake8', 'pylint'], 'c': ['cc', 'ccls', 'clangd', 'clangtidy', 'cppcheck', 'cquery', 'flawfinder']}
+let g:ale_fixers = {'javascript': ['standard'], 'typscript': ['standard'], 'python': ['black']}
 " 2}}}
 
 
@@ -161,6 +168,14 @@ let g:ale_fixers = {'javascript': ['standard'], 'typscript': ['ts-standard'], 'p
 " {{{2 Flake8
 " -----------------------------------------------------------------------------
 let g:flake8_show_in_gutter=1
+" 2}}}
+
+
+" -----------------------------------------------------------------------------
+" {{{2 Syntastic
+" -----------------------------------------------------------------------------
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers = ['python']
 " 2}}}
 
 " change intend behaviour for certain file types
@@ -183,7 +198,7 @@ let &t_EI = "\e[2 q"
 " Buffer
 nnoremap <space>r :CtrlPBuffer<CR>
 " Search
-nnoremap <space>pa :Ag ""<Left>
+nnoremap <space>pa :Ack ""<Left>
 " Save
 nnoremap <space>w :w<CR>
 " Debugger
