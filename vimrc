@@ -159,8 +159,25 @@ let g:UltiSnipsExpandTrigger = '<tab>'
 " -----------------------------------------------------------------------------
 " {{{2 Ale
 " -----------------------------------------------------------------------------
-let g:ale_linters = {'javascript': ['standard'], 'typscript': ['standard'], 'python': ['flake8', 'pylint'], 'c': ['cc', 'ccls', 'clangd', 'clangtidy', 'cppcheck', 'cquery', 'flawfinder']}
-let g:ale_fixers = {'javascript': ['standard'], 'typscript': ['standard'], 'python': ['black']}
+let g:ale_linters = {
+\   'javascript': ['standard'],
+\   'typescript': ['standard', 'tsserver'],
+\   'python': ['flake8', 'pylint'],
+\   'c': ['cc', 'ccls', 'clangd', 'clangtidy', 'cppcheck', 'cquery', 'flawfinder']
+\}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['standard'],
+\   'typescript': ['standard'],
+\   'python': ['black']
+\}
+let g:ale_linters_explicit = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_filetype_changed = 1
+let g:ale_echo_msg_format = '%severity%: %s %(code)% [%linter%]'
+let g:ale_python_flake8_options = '--max-line-length=80'
 " 2}}}
 
 
